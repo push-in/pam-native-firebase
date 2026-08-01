@@ -2,6 +2,11 @@
 
 declare(strict_types=1);
 
+$vendor = dirname(__DIR__).'/vendor/autoload.php';
+if (is_file($vendor)) {
+    require $vendor;
+}
+
 $roots = [
     'Pam\\Native\\Firebase\\' => dirname(__DIR__).'/src/',
     'Pam\\Native\\FeatureFlags\\' => dirname(__DIR__, 2).'/pam-native-feature-flags/src/',

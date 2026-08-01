@@ -29,5 +29,4 @@ jobs:
       - name: Install locked-compatible dependencies
         run: composer update --prefer-dist --no-interaction --no-progress
       - name: Run package contracts
-        run: composer test
-
+        run: php -d auto_prepend_file=vendor/autoload.php tests/run.php
