@@ -1,0 +1,58 @@
+{
+    "$schema": "vendor/pushinbr/pam-native/resources/pam-native.plugin.schema.json",
+    "version": 1,
+    "protocol": 1,
+    "pamNative": {
+        "minimum":"0.6.1",
+        "maximumExclusive": "0.7.0"
+    },
+    "php": {
+        "provider": "Pam\\Native\\Firebase\\FirebasePluginProvider"
+    },
+    "android": {
+        "namespace": "dev.pam.firebase",
+        "minSdk": 26,
+        "permissions": [
+            "android.permission.ACCESS_NETWORK_STATE",
+            "android.permission.INTERNET",
+            "android.permission.WAKE_LOCK"
+        ],
+        "manifest": "android/src/main/AndroidManifest.xml",
+        "dependencies": [
+            "com.google.firebase:firebase-analytics:23.2.0",
+            "com.google.firebase:firebase-common:22.2.0",
+            "com.google.firebase:firebase-config:23.1.0",
+            "com.google.firebase:firebase-crashlytics:20.1.0",
+            "com.google.firebase:firebase-installations:19.1.2",
+            "com.google.firebase:firebase-messaging:25.1.1"
+        ],
+        "sourceDirs": ["android/src/main/kotlin"]
+    },
+    "ios": {
+        "minimumVersion": "15.0",
+        "sourceDirs": ["ios/Sources"],
+        "swiftPackages": [
+            {
+                "url": "https://github.com/firebase/firebase-ios-sdk.git",
+                "requirement": {"kind": 1, "value": "12.17.0"},
+                "products": [
+                    "FirebaseAnalytics",
+                    "FirebaseCore",
+                    "FirebaseCrashlytics",
+                    "FirebaseInstallations",
+                    "FirebaseMessaging",
+                    "FirebaseRemoteConfig"
+                ]
+            }
+        ]
+    },
+    "idl": "pam-native.idl.json",
+    "modules": [
+        {
+            "name": "firebase",
+            "class": "dev.pam.firebase.FirebaseModule",
+            "iosClass": "FirebaseModule"
+        }
+    ],
+    "views": []
+}

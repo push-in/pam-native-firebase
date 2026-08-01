@@ -1,0 +1,28 @@
+{
+    "$schema": "vendor/pushinbr/pam-native-plugin-kit/resources/pam-native.idl.schema.json",
+    "version": 1,
+    "namespace": "Pam.Firebase",
+    "enums": {
+        "FirebaseOperationState": {
+            "Succeeded": 1,
+            "Failed": 2
+        },
+        "RemoteFetchState": {
+            "Activated": 1,
+            "Fetched": 2,
+            "Throttled": 3,
+            "Failed": 4
+        }
+    },
+    "records": {
+        "FirebaseAppIdentity": {
+            "name": "string",
+            "applicationId": "string",
+            "projectId": "string?"
+        },
+        "RemoteFetchResult": {
+            "state": "RemoteFetchState",
+            "changed": "bool"
+        }
+    }
+}
