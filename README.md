@@ -4,6 +4,11 @@ Official Firebase integration for PAM Native: multi-app configuration,
 Analytics, Remote Config, Messaging token lifecycle, Installations and
 Crashlytics.
 
+```bash
+composer require pushinbr/pam-native-firebase
+pam mobile prepare
+```
+
 ```php
 $firebase = new Firebase();
 
