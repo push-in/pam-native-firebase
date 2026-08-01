@@ -51,7 +51,6 @@ public final class FirebaseModule: NativeModule, @unchecked Sendable {
         options.projectID = values.optionalText("projectId")
         options.storageBucket = values.optionalText("storageBucket")
         options.databaseURL = values.optionalText("databaseUrl")
-        options.trackingID = values.optionalText("trackingId")
         FirebaseApp.configure(name: name, options: options)
         guard let app = FirebaseApp.app(name: name) else {
             throw FirebaseBridgeError.configurationFailed
@@ -128,7 +127,7 @@ public final class FirebaseModule: NativeModule, @unchecked Sendable {
         guard let dictionary = try JSONSerialization.jsonObject(with: data) as? [String: NSObject] else {
             throw FirebaseBridgeError.invalidDefaults
         }
-        remoteConfig(values).setDefaults(dictionary)
+        try remoteConfig(values).setDefaults(dictionary)
         try success(completion: completion)
     }
 
