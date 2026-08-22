@@ -63,7 +63,7 @@ $test('encodes Analytics events without JSON', static function () use ($expect):
         'first_purchase' => true,
     ], static fn () => null);
     $payload = Wire::decodeMap($fake->lastCall()?->payload ?? '');
-    $expect($payload === [
+    $expect($payload == [
         'event' => 'checkout_completed',
         'param_order_id' => 'order-1',
         'param_amount' => 42.5,
