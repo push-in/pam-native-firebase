@@ -1,20 +1,54 @@
+<!-- pam:product-page:start -->
+<div align="center">
+
 # PAM Native Firebase
 
-## Start here
+**The Firebase services mobile teams need, behind PAM-native contracts.**
 
-This is a Composer extension for PAM Native. Install the PAM Runtime, create a native project, and then add this package through PAM’s verified Composer toolchain:
+Connect Analytics, Crashlytics, Remote Config, and Messaging without coupling application code directly to vendor SDK objects.
+
+[![Latest version](https://img.shields.io/packagist/v/pushinbr/pam-native-firebase?style=flat-square&label=stable)](https://packagist.org/packages/pushinbr/pam-native-firebase)
+[![CI](https://img.shields.io/github/actions/workflow/status/push-in/pam-native-firebase/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/push-in/pam-native-firebase/actions)
+![PHP](https://img.shields.io/badge/PHP-8.5-777BB4?style=flat-square&logo=php&logoColor=white)
+![Android](https://img.shields.io/badge/Android-API%2026%2B-3DDC84?style=flat-square&logo=android&logoColor=white)
+![iOS](https://img.shields.io/badge/iOS-15%2B-000000?style=flat-square&logo=apple&logoColor=white)
+
+**[Documentation](https://push-in.github.io/pam-docs/native/overview/) · [Quick start](#quick-start) · [What you can build](#what-you-can-build) · [PAM ecosystem](https://push-in.github.io/pam-docs/ecosystem/) · [Issues](https://github.com/push-in/pam-native-firebase/issues)**
+
+</div>
+
+---
+
+## Why PAM Native Firebase
+
+Connect Analytics, Crashlytics, Remote Config, and Messaging without coupling application code directly to vendor SDK objects. The public API is strictly typed for PHP 8.5; expensive or frame-sensitive work stays in Rust or the platform SDK instead of crossing the application boundary every frame.
+
+| | |
+| --- | --- |
+| **Best for** | A focused capability you can add to any PAM Native application |
+| **Native path** | Firebase Android SDK · Firebase Apple SDK |
+| **Application model** | Composer package + generated native integration |
+| **Design rule** | Independent module; no feed, vertical, or application template bundled |
+
+## What you can build
+
+- Product analytics and conversion events
+- Crash diagnostics with application context
+- Push messaging and remotely controlled behavior
+
+## Quick start
+
+Already have a PAM Native project? Add only this capability:
 
 ```bash
-curl --proto '=https' --proto-redir '=https' --tlsv1.2 \
-    --connect-timeout 15 --max-time 60 --max-filesize 1048576 -fsSL \
-    https://github.com/push-in/pam/releases/latest/download/install.sh | sh
-
-pam init my-app --template native
-cd my-app
 pam composer require pushinbr/pam-native-firebase
 pam doctor --fix
 ```
 
+New to PAM? Follow the **[five-minute PAM Native setup](https://push-in.github.io/pam-docs/native/overview/)** once, then return here. Your application stays a normal Composer project with a committed lockfile.
+<!-- pam:product-page:end -->
+
+## See it in action
 
 Official Firebase integration for PAM Native: multi-app configuration,
 Analytics, Remote Config, Messaging token lifecycle, Installations and
@@ -47,7 +81,6 @@ runtime with `FirebaseAppOptions`.
 
 Incoming notification presentation and routing remain owned by PAM Native's
 notification capability; this package owns Firebase token and service APIs.
-
 
 ## What installation does
 
@@ -83,7 +116,7 @@ All coded states, kinds, and variants are sequential integer-backed enums. Use e
 
 ## Compatibility and support
 
-This package targets PAM Native `0.6.x`, Android API 26+, and iOS 15+ unless a platform-specific section above states a stricter requirement. Platform SDKs, credentials, entitlements, physical hardware, and store configuration remain application responsibilities.
+This package targets PAM Native `0.8.x`, Android API 26+, and iOS 15+ unless a platform-specific section above states a stricter requirement. Platform SDKs, credentials, entitlements, physical hardware, and store configuration remain application responsibilities.
 
 - [PAM documentation](https://push-in.github.io/pam-docs/introduction/)
 - [PAM Native overview](https://push-in.github.io/pam-docs/native/overview/)
