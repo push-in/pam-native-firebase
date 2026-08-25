@@ -6,6 +6,10 @@
         "minimum":"0.6.1",
         "maximumExclusive": "0.9.0"
     },
+    "capabilities": {
+        "required": ["runtime.modules.v1", "wire.binary.v1"],
+        "optional": []
+    },
     "php": {
         "provider": "Pam\\Native\\Firebase\\FirebasePluginProvider"
     },
