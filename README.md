@@ -62,7 +62,11 @@ Use `pam packages` to inspect availability and `pam remove firebase` to uninstal
 | `Firebase` | Configure apps and access Analytics, Remote Config, Messaging, Installations, and Crashlytics. |
 | `FirebaseAppOptions` | Configure named Firebase applications. |
 | `RemoteFetchResult` | Typed Remote Config fetch/activation result. |
-| `FirebaseFeatureFlagLoader` | Load Remote Config values into PAM feature flags. |
+| `Firebase::remoteValue()` | Read one provider-neutral Remote Config document. |
+
+Firebase deliberately does not depend on the feature-flags, sync, HTTP, or any
+other PAM Native plugin. Compose capabilities in application code: pass the
+string returned by `remoteValue()` to whichever independent consumer you chose.
 
 All coded states, kinds, and variants are sequential integer-backed enums. Use enum cases in application code; do not depend on raw wire numbers.
 
