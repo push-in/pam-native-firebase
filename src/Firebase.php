@@ -98,6 +98,19 @@ final class Firebase
         });
     }
 
+    /** @param Closure(?string): void $complete */
+    public function remoteValue(string $key, Closure $complete, string $app = '[DEFAULT]'): int
+    {
+        if (preg_match('/^[A-Za-z][A-Za-z0-9_.-]{0,255}$/D', $key) !== 1) {
+            throw new InvalidArgumentException('Remote Config key is invalid.');
+        }
+
+        return $this->remoteValues(
+            static fn (array $values): mixed => $complete($values[$key] ?? null),
+            $app,
+        );
+    }
+
     /** @param array<string, bool|int|float|string> $defaults @param Closure(FirebaseOperationState, ?string): void $complete */
     public function setRemoteDefaults(array $defaults, Closure $complete, string $app = '[DEFAULT]'): int
     {

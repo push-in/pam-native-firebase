@@ -7,11 +7,11 @@ if (is_file($vendor)) {
     require $vendor;
 }
 
+$ecosystemRoot = dirname(__DIR__, 2);
 $roots = [
     'Pam\\Native\\Firebase\\' => dirname(__DIR__).'/src/',
-    'Pam\\Native\\FeatureFlags\\' => dirname(__DIR__, 2).'/pam-native-feature-flags/src/',
-    'Pam\\Native\\Testing\\' => dirname(__DIR__, 2).'/pam-native-testing/src/',
-    'Pam\\Native\\' => dirname(__DIR__, 2).'/../pam-native/packages/native/src/',
+    'Pam\\Native\\Testing\\' => $ecosystemRoot.'/pam-native-testing/src/',
+    'Pam\\Native\\' => $ecosystemRoot.'/pam-native/packages/native/src/',
 ];
 spl_autoload_register(static function (string $class) use ($roots): void {
     foreach ($roots as $prefix => $root) {
@@ -25,7 +25,6 @@ spl_autoload_register(static function (string $class) use ($roots): void {
 
 use Pam\Native\Firebase\Firebase;
 use Pam\Native\Firebase\FirebaseAppOptions;
-use Pam\Native\Firebase\FirebaseFeatureFlagLoader;
 use Pam\Native\Firebase\FirebaseOperationState;
 use Pam\Native\Firebase\RemoteFetchState;
 use Pam\Native\Internal\Wire;
@@ -84,26 +83,16 @@ $test('normalizes Remote Config fetch states', static function () use ($expect):
     NativeTestHarness::uninstall();
 });
 
-$test('loads provider-neutral feature flags from Remote Config', static function () use ($expect): void {
-    $document = json_encode([
-        'version' => 1,
-        'flags' => [[
-            'key' => 'firebase.flag',
-            'default' => ['kind' => 1, 'value' => true],
-        ]],
-    ], JSON_THROW_ON_ERROR);
+$test('exposes Remote Config documents without depending on their consumer', static function () use ($expect): void {
+    $document = '{"version":1,"flags":[]}';
     $fake = NativeTestHarness::install();
     $fake->succeed('firebase', 'remoteValues', ['json' => json_encode(['pam_flags' => $document], JSON_THROW_ON_ERROR)]);
-    $provider = null;
-    $error = null;
-    (new FirebaseFeatureFlagLoader(new Firebase()))->load(
+    $loaded = null;
+    (new Firebase())->remoteValue(
         'pam_flags',
-        static function ($value, $message) use (&$provider, &$error): void {
-            $provider = $value;
-            $error = $message;
-        },
+        static function (?string $value) use (&$loaded): void { $loaded = $value; },
     );
-    $expect($error === null && $provider?->definition('firebase.flag') !== null);
+    $expect($loaded === $document);
     $fake->assertSatisfied();
     NativeTestHarness::uninstall();
 });
