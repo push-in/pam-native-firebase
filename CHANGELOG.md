@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- iOS links `FirebaseAnalyticsCore` instead of `FirebaseAnalytics`: no IDFA
+  support (`GoogleAppMeasurementIdentitySupport`) or ad conversion SDK in the
+  app by default. Every exposed API is unchanged. IDFA stays an explicit
+  opt-in: add the `FirebaseAnalyticsIdentitySupport` product in the app.
+
 ## 0.1.0 - 2026-08-01
 
 - Initial public release of the documented PAM Native package contract.

@@ -97,6 +97,14 @@ $test('exposes Remote Config documents without depending on their consumer', sta
     NativeTestHarness::uninstall();
 });
 
+$test('links the analytics core without IDFA support on iOS', static function () use ($expect): void {
+    $plugin = json_decode((string) file_get_contents(dirname(__DIR__).'/pam-native.plugin.json'), true, flags: JSON_THROW_ON_ERROR);
+    $products = $plugin['ios']['swiftPackages'][0]['products'];
+    $expect(in_array('FirebaseAnalyticsCore', $products, true));
+    $expect(!in_array('FirebaseAnalytics', $products, true));
+    $expect(!in_array('FirebaseAnalyticsIdentitySupport', $products, true));
+});
+
 $failures = 0;
 foreach ($tests as $name => $callback) {
     try {
