@@ -40,7 +40,7 @@
                 "url": "https://github.com/firebase/firebase-ios-sdk.git",
                 "requirement": {"kind": 1, "value": "12.17.0"},
                 "products": [
-                    "FirebaseAnalytics",
+                    "FirebaseAnalyticsCore",
                     "FirebaseCore",
                     "FirebaseCrashlytics",
                     "FirebaseInstallations",

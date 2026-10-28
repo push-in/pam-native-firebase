@@ -48,6 +48,16 @@ pam doctor --fix
 New to PAM? Follow the **[five-minute PAM Native setup](https://push-in.github.io/pam-docs/native/overview/)** once, then return here. Your application stays a normal Composer project with a committed lockfile.
 <!-- pam:product-page:end -->
 
+## Privacy: no IDFA
+
+On iOS the plugin links the `FirebaseAnalyticsCore` Swift product
+(`GoogleAppMeasurementCore`), not `FirebaseAnalytics`, which also pulls
+`GoogleAppMeasurementIdentitySupport` (IDFA) and `GoogleAdsOnDeviceConversion`.
+`logEvent`, `setUserId` and `setUserProperty` work the same without them; no
+API of this plugin needs IdentitySupport. An app that does want IDFA-based
+attribution adds the `FirebaseAnalyticsIdentitySupport` product itself (an
+explicit opt-in that also requires App Tracking Transparency).
+
 ## See it in action
 
 Official Firebase integration for PAM Native: multi-app configuration,
