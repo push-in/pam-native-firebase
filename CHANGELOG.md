@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.2 - 2026-10-28
 
 - iOS links `FirebaseAnalyticsCore` instead of `FirebaseAnalytics`: no IDFA
   support (`GoogleAppMeasurementIdentitySupport`) or ad conversion SDK in the
